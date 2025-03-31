@@ -1,28 +1,55 @@
 body {
-    background-color: #FFD580;
-    text-align: center;
+    background-color: #F1C27D; /* Light Orange Background */
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
 }
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    color: #D24B16; /* Dark Orange */
+}
+
 button {
-    background-color: #FF8C00;
+    background-color: #D24B16; /* Dark Orange */
     color: white;
-    font-size: 20px;
-    padding: 15px;
+    font-size: 1.5em;
+    padding: 15px 30px;
     border: none;
-    border-radius: 10px;
-    margin: 10px;
     cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
 }
-#video {
-    display: none;
-    width: 100%;
-    max-width: 400px;
+
+button:hover {
+    background-color: #B94413; /* Darker Orange */
 }
-#output {
-    margin-top: 20px;
+
+#upload-btn {
+    display: block;
+    margin: 20px auto;
 }
-#urlBox {
+
+#qr-url {
     width: 80%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 1em;
+    margin: 10px;
+}
+
+#copy-btn {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #F1C27D; /* Light Orange */
+    color: #D24B16;
+    border: 2px solid #D24B16;
+    cursor: pointer;
 }
