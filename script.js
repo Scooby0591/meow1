@@ -3,8 +3,8 @@ let scanner;
 
 function requestCameraPermission() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        // Get back camera by specifying facingMode: environment
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+        // Get back camera by specifying facingMode: environment (this avoids front camera)
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
             .then(function (stream) {
                 videoStream = stream;
                 document.getElementById('qr-video').srcObject = stream;
@@ -12,7 +12,7 @@ function requestCameraPermission() {
                 document.getElementById('scanner').style.display = 'block';
             })
             .catch(function (err) {
-                alert('Camera permission denied.');
+                alert('Camera permission denied or back camera not available.');
             });
     }
 }
