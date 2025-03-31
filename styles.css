@@ -11,7 +11,7 @@ body {
 
 .container {
     text-align: center;
-    position: relative; /* To position the flashlight button correctly */
+    position: relative;
 }
 
 h1 {
@@ -89,4 +89,32 @@ button:hover {
     #url-display {
         display: block;
     }
+}
+
+/* Styling for camera border and smaller QR scanner */
+#qr-video {
+    border: 5px solid #D24B16; /* Add border to the camera feed */
+    border-radius: 10px;
+    width: 60%; /* Make the video smaller */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#scanner {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#upload-btn {
+    font-size: 1.2em;
+}
+
+/* QR scanner shape (making it look like a QR code box) */
+#qr-video {
+    border: 5px solid #D24B16; /* Border for the camera feed */
+    border-radius: 10px; /* Rounded corners */
+    width: 200px; /* Smaller size for QR scanner */
+    height: 200px; /* Make it square like a QR code */
 }
