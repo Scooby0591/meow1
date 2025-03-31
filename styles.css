@@ -77,3 +77,16 @@ button:hover {
 #flashlight-btn:hover {
     background-color: #B94413; /* Darker Orange */
 }
+
+/* Styling for PC Mode */
+@media (min-width: 768px) {
+    #scanner {
+        display: none;
+    }
+    #upload-btn {
+        display: block;
+    }
+    #url-display {
+        display: block;
+    }
+}
