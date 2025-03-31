@@ -7,62 +7,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>QR Code Scanner</h1>
-    <button id="cameraPermission">Allow Camera Access</button>
-    <video id="video" playsinline></video>
-    <button id="flashlightToggle" style="display: none;">Turn On Flashlight</button>
-    <button id="uploadButton">Upload Image</button>
-    <input type="file" id="fileInput" accept="image/*" style="display: none;">
-    <div id="output">
-        <input type="text" id="urlBox" readonly>
-        <button onclick="copyURL()">COPY</button>
+    <div class="container">
+        <h1>QR Code Scanner</h1>
+        
+        <!-- Camera Permission Request -->
+        <div id="permission-request">
+            <button id="request-permission" onclick="requestCameraPermission()">Grant Camera Permission</button>
+        </div>
+
+        <!-- Flashlight Toggle -->
+        <button id="flashlight-btn" onclick="toggleFlashlight()">Flashlight</button>
+        
+        <!-- QR Scan Section -->
+        <div id="scanner" style="display:none;">
+            <video id="qr-video" width="100%" height="auto" autoplay></video>
+            <button id="upload-btn" onclick="uploadImage()">Upload QR Code Image</button>
+        </div>
+
+        <!-- QR URL Display -->
+        <div id="url-display" style="display:none;">
+            <input type="text" id="qr-url" readonly />
+            <button id="copy-btn" onclick="copyURL()">COPY</button>
+        </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cameraButton = document.getElementById("cameraPermission");
-            const video = document.getElementById("video");
-            const flashButton = document.getElementById("flashlightToggle");
-            const uploadButton = document.getElementById("uploadButton");
-            const fileInput = document.getElementById("fileInput");
-            let stream, track;
 
-            cameraButton.addEventListener("click", async () => {
-                try {
-                    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-                    video.srcObject = stream;
-                    video.play();
-                    video.style.display = "block";
-                    cameraButton.style.display = "none";
-                    flashButton.style.display = "inline-block";
-                    track = stream.getVideoTracks()[0];
-                } catch (error) {
-                    console.error("Error accessing camera:", error);
-                    alert("Camera access denied or not available");
-                }
-            });
-
-            flashButton.addEventListener("click", () => {
-                if (track) {
-                    const capabilities = track.getCapabilities();
-                    if (capabilities.torch) {
-                        track.applyConstraints({ advanced: [{ torch: true }] }).catch(err => console.error("Torch error:", err));
-                    } else {
-                        alert("Flashlight not supported on this device");
-                    }
-                }
-            });
-
-            uploadButton.addEventListener("click", () => {
-                fileInput.click();
-            });
-
-            function copyURL() {
-                const urlBox = document.getElementById("urlBox");
-                urlBox.select();
-                document.execCommand("copy");
-                alert("Copied to clipboard");
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
