@@ -53,3 +53,11 @@ button:hover {
     border: 2px solid #D24B16;
     cursor: pointer;
 }
+
+/* Position the flashlight button at the bottom */
+#flashlight-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
