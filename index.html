@@ -15,14 +15,14 @@
             <button id="request-permission" onclick="requestCameraPermission()">Grant Camera Permission</button>
         </div>
 
-        <!-- Flashlight Toggle -->
-        <button id="flashlight-btn" onclick="toggleFlashlight()">Flashlight</button>
-        
         <!-- QR Scan Section -->
         <div id="scanner" style="display:none;">
-            <video id="qr-video" width="100%" height="auto" autoplay></video>
             <button id="upload-btn" onclick="uploadImage()">Upload QR Code Image</button>
+            <video id="qr-video" width="100%" height="auto" autoplay></video>
         </div>
+
+        <!-- Flashlight Toggle -->
+        <button id="flashlight-btn" onclick="toggleFlashlight()">Flashlight</button>
 
         <!-- QR URL Display -->
         <div id="url-display" style="display:none;">
