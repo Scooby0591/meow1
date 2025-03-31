@@ -17,7 +17,7 @@
             <button id="request-permission" onclick="requestCameraPermission()">Grant Camera Permission</button>
         </div>
 
-        <!-- QR Scan Section -->
+        <!-- QR Scan Section (Visible only when camera permission is granted) -->
         <div id="scanner" style="display:none;">
             <button id="upload-btn" onclick="uploadImage()">Upload QR Code Image</button>
             <video id="qr-video" width="100%" height="auto" autoplay></video>
@@ -27,7 +27,7 @@
             </button>
         </div>
 
-        <!-- QR URL Display -->
+        <!-- URL Display Section (For PC Mode or after QR Code is scanned) -->
         <div id="url-display" style="display:none;">
             <input type="text" id="qr-url" readonly />
             <button id="copy-btn" onclick="copyURL()">COPY</button>
