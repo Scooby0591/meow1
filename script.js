@@ -3,7 +3,8 @@ let scanner;
 
 function requestCameraPermission() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
+        // Get back camera by specifying facingMode: environment
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
             .then(function (stream) {
                 videoStream = stream;
                 document.getElementById('qr-video').srcObject = stream;
