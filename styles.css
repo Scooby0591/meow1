@@ -11,6 +11,7 @@ body {
 
 .container {
     text-align: center;
+    position: relative; /* To position the flashlight button correctly */
 }
 
 h1 {
@@ -54,10 +55,25 @@ button:hover {
     cursor: pointer;
 }
 
-/* Position the flashlight button at the bottom */
+/* Flashlight button styles */
 #flashlight-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #D24B16; /* Dark Orange */
+    color: white;
+    font-size: 2em;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+#flashlight-btn i {
+    font-size: 1.5em;
+}
+
+#flashlight-btn:hover {
+    background-color: #B94413; /* Darker Orange */
 }
