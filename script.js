@@ -1,39 +1,56 @@
-const cameraButton = document.getElementById('cameraPermission');
-const video = document.getElementById('video');
-const flashButton = document.getElementById('flashlightToggle');
-const uploadButton = document.getElementById('uploadButton');
-const fileInput = document.getElementById('fileInput');
-let stream, track;
+let videoStream;
+let scanner;
 
-cameraButton.addEventListener('click', async () => {
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-        video.srcObject = stream;
-        video.play();
-        video.style.display = 'block';
-        cameraButton.style.display = 'none';
-        flashButton.style.display = 'inline-block';
-        track = stream.getVideoTracks()[0];
-    } catch (error) {
-        alert('Camera access denied or not available');
+function requestCameraPermission() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                videoStream = stream;
+                document.getElementById('qr-video').srcObject = stream;
+                document.getElementById('permission-request').style.display = 'none';
+                document.getElementById('scanner').style.display = 'block';
+            })
+            .catch(function (err) {
+                alert('Camera permission denied.');
+            });
     }
-});
+}
 
-flashButton.addEventListener('click', () => {
-    if (track) {
-        const capabilities = track.getCapabilities();
-        if (capabilities.torch) {
-            track.applyConstraints({ advanced: [{ torch: true }] });
-        }
+function toggleFlashlight() {
+    const videoTrack = videoStream.getVideoTracks()[0];
+    const capabilities = videoTrack.getCapabilities();
+    if (capabilities.torch) {
+        const torchState = videoTrack.getSettings().torch ? false : true;
+        videoTrack.applyConstraints({ advanced: [{ torch: torchState }] });
     }
-});
+}
 
-uploadButton.addEventListener('click', () => {
-    fileInput.click();
-});
+function uploadImage() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.click();
+    
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Assuming we use some QR code scanner library here, like `jsQR`
+            const qrCode = jsQR(e.target.result, file.width, file.height);
+            if (qrCode) {
+                document.getElementById('qr-url').value = qrCode.data;
+                document.getElementById('url-display').style.display = 'block';
+            } else {
+                alert('No QR code detected in the image.');
+            }
+        };
+        reader.readAsDataURL(file);
+    };
+}
 
 function copyURL() {
-    const urlBox = document.getElementById('urlBox');
-    urlBox.select();
+    const url = document.getElementById('qr-url');
+    url.select();
     document.execCommand('copy');
+    alert('URL copied to clipboard!');
 }
